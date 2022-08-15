@@ -24,7 +24,7 @@ namespace PhoneBook_PresentationApi.Endpoint.PhoneBook.Command
         //    return id;
 
         [HttpPost("/CreatePhoneBook")]
-        [Authorize]
+        //[Authorize]
         public override async Task<ActionResult<Guid>> HandleAsync([FromBody] CreatePhoneBookCommand request, CancellationToken cancellationToken = default)
         {
             //Guid id = 

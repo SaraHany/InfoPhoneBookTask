@@ -22,6 +22,7 @@ namespace PhoneBook_Persistence
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
             //var userGuid = Guid.NewGuid();
             //var phoneBookGuid = Guid.NewGuid();
 

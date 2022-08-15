@@ -11,6 +11,7 @@ using PhoneBook_Application.features.Registration_User.Command;
 using PhoneBook_Persistence;
 using PhoneBook_PresentationApi.Endpoint.PhoneBook.Queries;
 using PhoneBook_PresentationApi.Helpers;
+using System.Security.Claims;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -52,7 +53,9 @@ builder.Services.AddAuthentication(options =>
 
 
 builder.Services.AddDbContext<DbContext>();
-
+builder.Services.AddIdentityCore<Users>();
+builder.Services.AddHttpContextAccessor();
+builder.Services.Configure<ClaimsIdentityOptions>(x => x.UserIdClaimType = ClaimTypes.NameIdentifier);
 
 builder.Services.AddAuthorization();
 builder.Services.AddHealthChecks();
