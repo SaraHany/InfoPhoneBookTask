@@ -22,6 +22,7 @@ namespace PhoneBook_Persistence
             services.AddScoped(typeof(IAsyncRepository<>), typeof(BaseRepository<>));
             services.AddScoped(typeof(IPhoneBookRepository), typeof(PhoneBookRepository));
             services.AddScoped(typeof(IUsersRepository), typeof(UsersRepository));
+            services.AddScoped(typeof(IUserAsyncRepository<>), typeof(UsersBaseRepository<>));
 
             return services;
         }

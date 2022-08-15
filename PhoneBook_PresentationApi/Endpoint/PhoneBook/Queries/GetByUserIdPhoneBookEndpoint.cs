@@ -1,10 +1,11 @@
-﻿using MediatR;
+﻿using Ardalis.ApiEndpoints;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using PhoneBook_Application.features.Phone_Book.Queries.GetPhoneBookByUserID;
 
 namespace PhoneBook_PresentationApi.Endpoint.PhoneBook.Queries
 {
-    public class GetByUserIdPhoneBookEndpoint
+    public class GetByUserIdPhoneBookEndpoint : EndpointBaseAsync.WithRequest<Guid>.WithActionResult<List<GetPhoneBookByUserViewModel>>
     {
         private readonly IMediator _mediator;
 
@@ -13,8 +14,14 @@ namespace PhoneBook_PresentationApi.Endpoint.PhoneBook.Queries
             _mediator = mediator;
         }
 
+        //public async Task<List<GetPhoneBookByUserViewModel>> HandleAsync(Guid id, CancellationToken cancellationToken)
+        //{
+        //    var getEventDetailQuery = new GetPhoneBookByUserQuery() { UserId = id };
+        //    return await _mediator.Send(getEventDetailQuery);
+        //}
+
         [HttpGet("/GetByUserIdPhoneBook/{id:guid}")]
-        public async Task<List<GetPhoneBookByUserViewModel>> HandleAsync(Guid id, CancellationToken cancellationToken)
+        public override async Task<ActionResult<List<GetPhoneBookByUserViewModel>>> HandleAsync([FromRoute] Guid id, CancellationToken cancellationToken = default)
         {
             var getEventDetailQuery = new GetPhoneBookByUserQuery() { UserId = id };
             return await _mediator.Send(getEventDetailQuery);

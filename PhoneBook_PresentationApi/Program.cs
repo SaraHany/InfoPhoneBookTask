@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using PhoneBook_Api;
 using PhoneBook_Application;
@@ -18,9 +19,13 @@ var builder = WebApplication.CreateBuilder(args);
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
 builder.Services.AddPersistenceServices(builder.Configuration);
-builder.Services.AddIdentity<Users, IdentityRole>().AddEntityFrameworkStores<PhoneBookDbContext>();
+
+builder.Services.AddIdentity<Users, IdentityRole>().AddEntityFrameworkStores<PhoneBookDbContext>()/*.AddDefaultTokenProviders()*/;
+
 builder.Services.AddApplicationServices();
+
 //map data of jwt from appsetting to class jwt
 builder.Services.Configure<JWT>(builder.Configuration.GetSection("JWT"));
 
@@ -45,7 +50,13 @@ builder.Services.AddAuthentication(options =>
     };
 });
 
+
+builder.Services.AddDbContext<DbContext>();
+
+
+builder.Services.AddAuthorization();
 builder.Services.AddHealthChecks();
+builder.Services.AddControllers();
 
 var app = builder.Build();
 
@@ -63,13 +74,17 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.MapGet("/GetByIdPhoneBook/{id}", (Guid id) => { });
-app.MapGet("/GetByUserIdPhoneBook/{id}", (Guid id) => { });
-app.MapPost("/CreatePhoneBook", ([FromBody] CreatePhoneBookCommand createPhoneBookCommand) => { });
-app.MapPut("/UpdatePhoneBook", ([FromBody] UpdatePhoneBookCommand updatePhoneBookCommand) => { });
-app.MapDelete("/DeletePhoneBook/{id}", (Guid id) => { });
-app.MapPost("/Register", ([FromBody] RegisterUserDto registerUserDTO) => { });
-app.MapPost("/Login", ([FromBody] LoginUserDto loginUserDTO) => { });
+//app.MapGet("/GetPhoneBook", () => { });
+//app.MapGet("/GetByIdPhoneBook/{id}", (Guid id) => { });
+//app.MapGet("/GetByUserIdPhoneBook/{id}", (Guid id) => { });
+//app.MapPost("/CreatePhoneBook", ([FromBody] CreatePhoneBookCommand createPhoneBookCommand) => { });
+//app.MapPut("/UpdatePhoneBook", ([FromBody] UpdatePhoneBookCommand updatePhoneBookCommand) => { });
+//app.MapDelete("/DeletePhoneBook/{id}", (Guid id) => { });
+//app.MapPost("/Register", ([FromBody] RegisterUserDto registerUserDTO) => { });
+//app.MapPost("/Login", ([FromBody] LoginUserDto loginUserDTO) => { });
+
+
+
 //app.MapGet("/api/home", (Func<string>)(() => "Hello"));
 
 
@@ -94,7 +109,8 @@ app.MapPost("/Login", ([FromBody] LoginUserDto loginUserDTO) => { });
 
 app.UseRouting();
 app.UseAuthentication();
-//app.UseAuthorization();
+app.UseAuthorization();
+
 //app.UseEndpoints(endpoints =>
 //{
 //    endpoints.MapControllerRoute(
@@ -102,6 +118,7 @@ app.UseAuthentication();
 //        pattern: "{controller=Home}/{action=Index}/{id?}");
 //});
 
+app.MapControllers();
 app.UseHttpsRedirection();
 
 app.Run();
