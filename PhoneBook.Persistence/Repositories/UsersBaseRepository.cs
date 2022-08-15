@@ -25,14 +25,14 @@ namespace PhoneBook_Persistence.Repositories
         private readonly UserManager<Users> _userManager;
         private readonly IConfiguration config;
 
-        public UsersBaseRepository(UserManager<Users> userManager, IConfiguration configuration,PhoneBookDbContext dbContext)
+        public UsersBaseRepository(UserManager<Users> userManager, IConfiguration configuration, PhoneBookDbContext dbContext)
         {
             _dbContext = dbContext;
             _userManager = userManager;
             config = configuration;
         }
 
-        public virtual async Task<T> GetByIdAsync(Guid id)
+        public virtual async Task<T> GetByIdAsync(string id)
         {
             return await _dbContext.Set<T>().FindAsync(id);
         }
@@ -49,7 +49,7 @@ namespace PhoneBook_Persistence.Repositories
             Users user = new Users();
             user.UserName = registerUserDto.UserName;
             user.Email = registerUserDto.Email;
-            //user.Password = registerUserDto.Password;
+            user.Password = registerUserDto.Password;
             IdentityResult result = await _userManager.CreateAsync(user, registerUserDto.Password);
             //if (!result.Succeeded)
             //{
@@ -58,7 +58,7 @@ namespace PhoneBook_Persistence.Repositories
             //}
         }
 
-        public async Task<object> Login(LoginUserDto loginUserDto/*,T entity*/)
+        public async Task<string> Login(LoginUserDto loginUserDto/*,T entity*/)
         {
             Users user = await _userManager.FindByEmailAsync(loginUserDto.Email);
             if(user != null)
@@ -86,14 +86,15 @@ namespace PhoneBook_Persistence.Repositories
                         expires: DateTime.Now.AddHours(1),
                         signingCredentials: signingCredential
                         );
-                    return new {
-                        token = new JwtSecurityTokenHandler().WriteToken(mytoken),
-                        expiration = mytoken.ValidTo,
-                    };
+                    //return new {
+                    //    token = new JwtSecurityTokenHandler().WriteToken(mytoken),
+                    //    expiration = mytoken.ValidTo,
+                    //};
+                    return new JwtSecurityTokenHandler().WriteToken(mytoken).ToString();
                 }
-                return null;
+                return "";
             }
-            return null;
+            return "";
         }
     }
 }

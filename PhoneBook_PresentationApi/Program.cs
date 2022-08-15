@@ -23,7 +23,8 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddPersistenceServices(builder.Configuration);
 
-builder.Services.AddIdentity<Users, IdentityRole>().AddEntityFrameworkStores<PhoneBookDbContext>()/*.AddDefaultTokenProviders()*/;
+builder.Services.AddIdentityCore<Users>();
+/*builder.Services.AddIdentity<Users, IdentityRole>().AddEntityFrameworkStores<PhoneBookDbContext>().AddDefaultTokenProviders();*/
 
 builder.Services.AddApplicationServices();
 
@@ -52,8 +53,7 @@ builder.Services.AddAuthentication(options =>
 });
 
 
-builder.Services.AddDbContext<DbContext>();
-builder.Services.AddIdentityCore<Users>();
+builder.Services.AddDbContext<PhoneBookDbContext>();
 builder.Services.AddHttpContextAccessor();
 builder.Services.Configure<ClaimsIdentityOptions>(x => x.UserIdClaimType = ClaimTypes.NameIdentifier);
 

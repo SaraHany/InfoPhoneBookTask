@@ -9,6 +9,6 @@ namespace PhoneBook_Application.features.Phone_Book.Queries.GetPhoneBookByUserID
 {
     public class GetPhoneBookByUserQuery : IRequest<List<GetPhoneBookByUserViewModel>>
     {
-        public Guid UserId { get; set; }
+        public string UserId { get; set; }
     }
 }

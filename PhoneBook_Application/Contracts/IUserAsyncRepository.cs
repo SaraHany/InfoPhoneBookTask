@@ -10,9 +10,9 @@ namespace PhoneBook_Application.Contracts
 {
     public interface IUserAsyncRepository<T> where T : class
     {
-        Task<T> GetByIdAsync(Guid id);
+        Task<T> GetByIdAsync(string id);
         Task<IReadOnlyList<T>> ListAllAsync();
         Task<Unit> Register(RegisterUserDto registerUserDto/*, T entity*/);
-        Task<object> Login(LoginUserDto loginUserDto/*T entity*/);
+        Task<string> Login(LoginUserDto loginUserDto/*T entity*/);
     }
 }

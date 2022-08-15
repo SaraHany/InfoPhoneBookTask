@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using PhoneBook_Api;
 using PhoneBook_Application.Contracts;
 using System;
@@ -12,7 +13,9 @@ namespace PhoneBook_Persistence.Repositories
 {
     internal class UsersRepository : UsersBaseRepository<Users>, IUsersRepository
     {
-        public UsersRepository(PhoneBookDbContext phoneBookDbContext) : base(null, null, phoneBookDbContext)
+        private readonly UserManager<Users> _userManager;
+        private readonly IConfiguration config;
+        public UsersRepository(UserManager<Users> _userManager, IConfiguration config, PhoneBookDbContext phoneBookDbContext) : base(_userManager, config, phoneBookDbContext)
         {
 
         }
@@ -23,7 +26,7 @@ namespace PhoneBook_Persistence.Repositories
             return allUsers;
         }
 
-        public async Task<Users> GetUserByIdAsync(Guid id, bool includePhoneBook)
+        public async Task<Users> GetUserByIdAsync(string id, bool includePhoneBook)
         {
             Users user = new Users();
             user = includePhoneBook ? await _dbContext.users.Include(x => x.PhoneBooks).FirstOrDefaultAsync(x => x.Id == id) : await GetByIdAsync(id);

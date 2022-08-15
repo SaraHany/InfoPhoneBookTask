@@ -5,7 +5,7 @@ using PhoneBook_Application.features.Phone_Book.Queries.GetPhoneBookByUserID;
 
 namespace PhoneBook_PresentationApi.Endpoint.PhoneBook.Queries
 {
-    public class GetByUserIdPhoneBookEndpoint : EndpointBaseAsync.WithRequest<Guid>.WithActionResult<List<GetPhoneBookByUserViewModel>>
+    public class GetByUserIdPhoneBookEndpoint : EndpointBaseAsync.WithRequest<string>.WithActionResult<List<GetPhoneBookByUserViewModel>>
     {
         private readonly IMediator _mediator;
 
@@ -21,7 +21,7 @@ namespace PhoneBook_PresentationApi.Endpoint.PhoneBook.Queries
         //}
 
         [HttpGet("/GetByUserIdPhoneBook/{id:guid}")]
-        public override async Task<ActionResult<List<GetPhoneBookByUserViewModel>>> HandleAsync([FromRoute] Guid id, CancellationToken cancellationToken = default)
+        public override async Task<ActionResult<List<GetPhoneBookByUserViewModel>>> HandleAsync([FromRoute] string id, CancellationToken cancellationToken = default)
         {
             var getEventDetailQuery = new GetPhoneBookByUserQuery() { UserId = id };
             return await _mediator.Send(getEventDetailQuery);

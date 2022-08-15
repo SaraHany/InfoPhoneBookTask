@@ -11,6 +11,6 @@ namespace PhoneBook_Application.Contracts.Persistence
     {
         Task<IReadOnlyList<PhoneBook>> GetAllPhoneBookAsync(/*bool includeUsers*/);
         Task<PhoneBook> GetPhoneBookByIdAsync(Guid PhoneBookId/*, bool includeUsers*/);
-        Task<IReadOnlyList<PhoneBook>> GetPhoneBookByUserIdAsync(Guid UserId/*, bool includeUsers*/);
+        Task<IReadOnlyList<PhoneBook>> GetPhoneBookByUserIdAsync(string UserId/*, bool includeUsers*/);
     }
 }
