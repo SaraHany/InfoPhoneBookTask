@@ -64,6 +64,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.MapGet("/GetByIdPhoneBook/{id}", (Guid id) => { });
+app.MapGet("/GetByUserIdPhoneBook/{id}", (Guid id) => { });
 app.MapPost("/CreatePhoneBook", ([FromBody] CreatePhoneBookCommand createPhoneBookCommand) => { });
 app.MapPut("/UpdatePhoneBook", ([FromBody] UpdatePhoneBookCommand updatePhoneBookCommand) => { });
 app.MapDelete("/DeletePhoneBook/{id}", (Guid id) => { });

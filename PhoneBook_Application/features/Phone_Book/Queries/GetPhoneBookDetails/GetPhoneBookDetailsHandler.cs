@@ -21,12 +21,10 @@ namespace PhoneBook_Application.features.Phone_Book.Queries.GetPhoneBookDetails
             _mapper = mapper;
         }
 
-
-
         public async Task<GetPhoneBookDetailsViewModel> Handle(GetPhoneBookDetailsQuery request, CancellationToken cancellationToken)
         {
-            //true to get users
-            var allPhoneBook = await _phoneBookRepository.GetPhoneBookByIdAsync(request.PhoneBookId, true);
+            //true to get PhoneBook
+            var allPhoneBook = await _phoneBookRepository.GetPhoneBookByIdAsync(request.PhoneBookId/*, true*/);
             return _mapper.Map<GetPhoneBookDetailsViewModel>(allPhoneBook);
         }
     }

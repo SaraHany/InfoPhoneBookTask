@@ -9,7 +9,8 @@ namespace PhoneBook_Application.Contracts.Persistence
 {
     public interface IPhoneBookRepository : IAsyncRepository<PhoneBook>
     {
-        Task<IReadOnlyList<PhoneBook>> GetAllPhoneBookAsync(bool includeUsers);
-        Task<PhoneBook> GetPhoneBookByIdAsync(Guid PhoneBookId, bool includeUsers);
+        Task<IReadOnlyList<PhoneBook>> GetAllPhoneBookAsync(/*bool includeUsers*/);
+        Task<PhoneBook> GetPhoneBookByIdAsync(Guid PhoneBookId/*, bool includeUsers*/);
+        Task<IReadOnlyList<PhoneBook>> GetPhoneBookByUserIdAsync(Guid UserId/*, bool includeUsers*/);
     }
 }

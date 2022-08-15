@@ -24,7 +24,7 @@ namespace PhoneBook_Application.features.Phone_Book.Queries.GetPhoneBookList
         public async Task<List<GetPhoneBookListViewModel>> Handle(GetPhoneBookListQuery request, CancellationToken cancellationToken)
         {
             //true to get users
-            var allPhoneBook = await _phoneBookRepository.GetAllPhoneBookAsync(true);
+            var allPhoneBook = await _phoneBookRepository.GetAllPhoneBookAsync(/*true*/);
             return _mapper.Map<List<GetPhoneBookListViewModel>>(allPhoneBook);
         }
     }

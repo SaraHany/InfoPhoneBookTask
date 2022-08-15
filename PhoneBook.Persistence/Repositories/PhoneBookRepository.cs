@@ -15,17 +15,35 @@ namespace PhoneBook_Persistence.Repositories
         {
 
         }
-        public async Task<IReadOnlyList<PhoneBook>> GetAllPhoneBookAsync(bool includeUser)
+        public async Task<IReadOnlyList<PhoneBook>> GetAllPhoneBookAsync()
         {
             List<PhoneBook> allPhoneBook = new List<PhoneBook>();
-            allPhoneBook = includeUser ? await _dbContext.phoneBook.Include(x => x.User).ToListAsync() : await _dbContext.phoneBook.ToListAsync();
+            allPhoneBook = await _dbContext.phoneBook.ToListAsync() /*: await _dbContext.phoneBook.ToListAsync()*/;
             return allPhoneBook;
         }
 
-        public async Task<PhoneBook> GetPhoneBookByIdAsync(Guid id, bool includeUser)
+        public async Task<PhoneBook> GetPhoneBookByIdAsync(Guid id)
         {
             PhoneBook phoneBook = new PhoneBook();
-            phoneBook = includeUser ? await _dbContext.phoneBook.Include(x => x.User).FirstOrDefaultAsync(x => x.Id == id) : await GetByIdAsync(id);
+            phoneBook = await _dbContext.phoneBook.FirstOrDefaultAsync(x => x.Id == id) /*: await GetByIdAsync(id)*/;
+            return phoneBook;
+        }
+        
+        //public async Task<List<PhoneBook>> GetPhoneBookByUserIdAsync(Guid id)
+        //{
+        //    List<PhoneBook> phoneBook = new List<PhoneBook>();
+        //    //phoneBook = await _dbContext.phoneBook.ToListAsync();
+        //    //phoneBook = phoneBook.Select();
+        //    phoneBook= (List<PhoneBook>)(await (_dbContext.phoneBook).ToListAsync()).Select(x => x.UserId == id);
+        //    return phoneBook;
+        //}
+
+        public async Task<IReadOnlyList<PhoneBook>> GetPhoneBookByUserIdAsync(Guid id)
+        {
+            List<PhoneBook> phoneBook = new List<PhoneBook>();
+            //phoneBook = await _dbContext.phoneBook.ToListAsync();
+            //phoneBook = phoneBook.Select();
+            phoneBook = (List<PhoneBook>)(await(_dbContext.phoneBook).ToListAsync()).Select(x => x.UserId == id);
             return phoneBook;
         }
     }

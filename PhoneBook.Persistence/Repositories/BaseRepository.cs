@@ -21,6 +21,11 @@ namespace PhoneBook_Persistence.Repositories
         {
             return await _dbContext.Set<T>().FindAsync(id);
         }
+        public virtual async Task<IReadOnlyList<T>> GetByUserIdAsync(Guid id)
+        {
+            return await _dbContext.Set<T>().ToListAsync();
+            //return await _dbContext.Set<T>().Where(o => id).ToListAsync();
+        }
 
         public async Task<IReadOnlyList<T>> ListAllAsync()
         {
