@@ -41,9 +41,8 @@ namespace PhoneBook_Persistence.Repositories
         public async Task<IReadOnlyList<PhoneBook>> GetPhoneBookByUserIdAsync(string id)
         {
             List<PhoneBook> phoneBook = new List<PhoneBook>();
-            //phoneBook = await _dbContext.phoneBook.ToListAsync();
-            //phoneBook = phoneBook.Select();
-            phoneBook = (List<PhoneBook>)(await(_dbContext.phoneBook).ToListAsync()).Select(x => x.UsersId == id);
+            //phoneBook = (List<PhoneBook>)(await(_dbContext.phoneBook).ToListAsync()).Select(x => x.UsersId == id);
+            phoneBook = await _dbContext.phoneBook.Where(x => x.UsersId == id).ToListAsync();
             return phoneBook;
         }
     }

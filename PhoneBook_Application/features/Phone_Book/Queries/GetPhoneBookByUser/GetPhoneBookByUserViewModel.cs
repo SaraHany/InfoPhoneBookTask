@@ -12,6 +12,6 @@ namespace PhoneBook_Application.features.Phone_Book.Queries.GetPhoneBookByUserID
         public Guid PhoneBookId { get; set; }
         public string? Name { get; set; }
         public string? PhoneNumber { get; set; }
-        public UsersDTO? User { get; set; }
+        public string? UsersId { get; set; }
     }
 }

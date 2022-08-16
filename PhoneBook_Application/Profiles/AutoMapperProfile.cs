@@ -3,6 +3,7 @@ using PhoneBook_Api;
 using PhoneBook_Application.features.Phone_Book.Commands.CreatePhoneBook;
 using PhoneBook_Application.features.Phone_Book.Commands.DeletePhoneBook;
 using PhoneBook_Application.features.Phone_Book.Commands.UpdatePhoneBook;
+using PhoneBook_Application.features.Phone_Book.Queries.GetPhoneBookByUserID;
 using PhoneBook_Application.features.Phone_Book.Queries.GetPhoneBookDetails;
 using PhoneBook_Application.features.Phone_Book.Queries.GetPhoneBookList;
 using System;
@@ -19,6 +20,7 @@ namespace PhoneBook_Application.Profiles
         {
             CreateMap<PhoneBook, GetPhoneBookListViewModel>().ReverseMap();
             CreateMap<PhoneBook, GetPhoneBookDetailsViewModel>().ReverseMap();
+            CreateMap<PhoneBook, GetPhoneBookByUserViewModel>().ReverseMap();
             CreateMap<Users, UsersDTO>().ReverseMap();
             CreateMap<PhoneBook, CreatePhoneBookCommand>().ReverseMap();
             CreateMap<PhoneBook, UpdatePhoneBookCommand>().ReverseMap();
