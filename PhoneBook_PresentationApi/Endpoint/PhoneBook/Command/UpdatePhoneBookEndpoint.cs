@@ -22,7 +22,7 @@ namespace PhoneBook_PresentationApi.Endpoint.PhoneBook.Command
         //}
 
         [HttpPut("/UpdatePhoneBook")]
-        [Authorize]
+        //[Authorize]
         public override async Task<ActionResult> HandleAsync([FromBody] UpdatePhoneBookCommand request, CancellationToken cancellationToken = default)
         {
             await _mediator.Send(request);

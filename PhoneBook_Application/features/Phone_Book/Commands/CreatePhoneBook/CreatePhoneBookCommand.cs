@@ -11,7 +11,7 @@ namespace PhoneBook_Application.features.Phone_Book.Commands.CreatePhoneBook
     public class CreatePhoneBookCommand : IRequest<Guid>
     {
         public string? Name { get; set; }
-        public string? PhonNumber { get; set; }
+        public string? PhoneNumber { get; set; }
         public string UsersId { get; set; }
     }
 }

@@ -23,7 +23,7 @@ namespace PhoneBook_PresentationApi.Endpoint.PhoneBook.Command
         //}
 
         [HttpDelete("/DeletePhoneBook/{id:guid}")]
-        [Authorize]
+        //[Authorize]
         public override async Task<ActionResult> HandleAsync([FromRoute] Guid id, CancellationToken cancellationToken = default)
         {
             var deletePostCommand = new DeletePhoneBookCommand() { PhoneBookId = id };

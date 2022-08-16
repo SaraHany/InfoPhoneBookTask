@@ -13,7 +13,7 @@ namespace PhoneBook_Application.features.Phone_Book.Commands.UpdatePhoneBook
         public Guid PhoneBookId { get; set; }
         //data changed
         public string? Name { get; set; }
-        public string? PhonNumber { get; set; }
-        public Guid UserId { get; set; }
+        public string? PhoneNumber { get; set; }
+        public string UsersId { get; set; }
     }
 }

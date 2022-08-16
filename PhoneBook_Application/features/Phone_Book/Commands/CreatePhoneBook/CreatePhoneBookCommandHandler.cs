@@ -35,7 +35,7 @@ namespace PhoneBook_Application.features.Phone_Book.Commands.CreatePhoneBook
             }
 
             phoneBook = await _phoneBookRepository.AddAsync(phoneBook);
-            return phoneBook.Id;
+            return phoneBook.PhoneBookId;
         }
     }
 }

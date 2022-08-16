@@ -25,7 +25,7 @@ namespace PhoneBook_Persistence.Repositories
         public async Task<PhoneBook> GetPhoneBookByIdAsync(Guid id)
         {
             PhoneBook phoneBook = new PhoneBook();
-            phoneBook = await _dbContext.phoneBook.FirstOrDefaultAsync(x => x.Id == id) /*: await GetByIdAsync(id)*/;
+            phoneBook = await _dbContext.phoneBook.FirstOrDefaultAsync(x => x.PhoneBookId == id) /*: await GetByIdAsync(id)*/;
             return phoneBook;
         }
         

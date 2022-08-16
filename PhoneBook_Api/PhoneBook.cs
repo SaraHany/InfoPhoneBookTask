@@ -10,7 +10,7 @@ namespace PhoneBook_Api
 {
     public class PhoneBook
     {
-        public Guid Id { get; set; }
+        public Guid PhoneBookId { get; set; }
         public string? Name { get; set; }
         public string? PhoneNumber { get; set; }
         public string UsersId { get; set; }

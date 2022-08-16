@@ -15,7 +15,7 @@ namespace PhoneBook_Application.features.Phone_Book.Commands.CreatePhoneBook
                 .NotEmpty()
                 .NotNull()
                 .MaximumLength(20);
-            RuleFor(p => p.PhonNumber)
+            RuleFor(p => p.PhoneNumber)
                 .NotEmpty()
                 .NotNull();
         }
